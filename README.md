@@ -187,10 +187,10 @@ dependencies:
 
 ## Contributing
 
-This is a personal learning repository maintained by SAEHL. No external contributions are expected. If you are forking this for your own use, please remove the AMCMDV branding.
+This is a personal learning repository maintained by AMCMDV. No external contributions are expected. If you are forking this for your own use, please remove the AMCMDV branding.
 
 ---
 
 ## Licence
 
-Private. All rights reserved. AMCMDV © 2025.
+Private. All rights reserved. AMCMDV © 2026.
