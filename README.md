@@ -102,4 +102,4 @@ scratch/                    → Experimental — not reviewed, not in CI
 
 ## Licence
 
-Private. All rights reserved. SAEHL © 2025.
+Private. All rights reserved. AMCMDV © 2025.
