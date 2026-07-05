@@ -1,25 +1,30 @@
 # python-learning-fundamentals
 
-A structured Python learning repository organised by topic and progression level. Each module contains annotated Jupyter notebooks, worked exercises, and small runnable examples. This repository supersedes `MacOS_Repository_Restructured` on the legacy `amcm_dev01` account.
+A structured Python learning curriculum organised by topic and progressive difficulty. Each module contains annotated Jupyter notebooks, worked exercises, and runnable examples. This repository supersedes `MacOS_Repository_Restructured` (legacy account: `amcm_dev01`).
 
 ---
 
 ## Repository Status
 
-| Item | Value |
+| Item | Detail |
 |---|---|
-| Language | Python 3.11+ |
-| Runtime | Jupyter Lab / Notebook |
-| Environment Manager | Conda (`environment.yml`) |
-| Legacy Repo | `amcm_dev01/MacOS_Repository_Restructured` (deprecated) |
+| Language | Python 3.11 |
+| Runtime | JupyterLab 4.x |
+| Environment | Conda · `environment.yml` · `py-fundamentals` |
+| Kernel | `py-fundamentals` (registered via `ipykernel`) |
+| Output Stripping | `nbstripout` git hook — strips cell outputs on every commit |
+| Legacy Repo | `amcm_dev01/MacOS_Repository_Restructured` — archived, read-only |
 | Owner | AMCMDV |
 
 ---
 
 ## Prerequisites
 
-- [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Anaconda](https://www.anaconda.com/)
-- Git ≥ 2.39
+| Requirement | Version | Purpose |
+|---|---|---|
+| [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Anaconda](https://www.anaconda.com/) | ≥ 23.x | Environment and package management |
+| Git | ≥ 2.39 | Version control |
+| macOS / Linux | — | Windows requires WSL2 for full shell compatibility |
 
 ---
 
@@ -27,34 +32,46 @@ A structured Python learning repository organised by topic and progression level
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<new-org>/python-learning-fundamentals.git
+git clone https://github.com/<saehl-org>/python-learning-fundamentals.git
 cd python-learning-fundamentals
 
 # 2. Create and activate the Conda environment
 conda env create -f environment.yml
 conda activate py-fundamentals
 
-# 3. Launch Jupyter Lab
+# 3. Register the Jupyter kernel
+python -m ipykernel install --user \
+  --name py-fundamentals \
+  --display-name "Python 3.11 (py-fundamentals)"
+
+# 4. Install the nbstripout git hook
+#    Strips cell outputs automatically on every commit — required, not optional
+nbstripout --install
+nbstripout --status   # verify: "nbstripout is installed in this repository"
+
+# 5. Launch JupyterLab
 jupyter lab
 ```
+
+> **Note for contributors**: Steps 3 and 4 must be completed in every fresh clone. Skipping step 4 will cause cell outputs containing local paths to enter git history permanently.
 
 ---
 
 ## Learning Path
 
-Work through modules sequentially. Each module directory contains a `README.md` with objectives and a checklist.
+Work through modules sequentially. Each module directory contains a `README.md` with learning objectives and a completion checklist. Do not skip modules — each introduces concepts used by the next.
 
 ```
-01-basics/                  → Data types, I/O, sets, dictionaries
-02-control-flow/            → Loops, conditionals, list comprehensions
-03-functions/               → Functions, *args/**kwargs, scope, exercises
-04-error-handling/          → try/except, finally, custom exceptions
-05-oop/                     → Classes, inheritance, polymorphism, dunder methods
-06-modules-and-packages/    → Import system, pip, PyPI, writing packages
+01-basics/                  → Data types, file I/O, sets, dictionaries
+02-control-flow/            → Loops, conditionals, then list comprehensions
+03-functions/               → Definitions, scope, *args/**kwargs, exercises
+04-error-handling/          → try/except/else/finally, explicit exception types
+05-oop/                     → Classes, inheritance, polymorphism, dunder protocol
+06-modules-and-packages/    → Import system, packages, pip, PyPI
 07-projects/
   ├── project-01-confidence-game/   → Milestone 1: CLI game (functions + I/O)
   └── project-02-card-game/         → Milestone 2: Card game (OOP full stack)
-scratch/                    → Personal sandpit — not reviewed or tested
+scratch/                    → Experimental — not reviewed, not in CI
 ```
 
 ---
@@ -63,134 +80,41 @@ scratch/                    → Personal sandpit — not reviewed or tested
 
 | Module | Key Concepts | Notebooks |
 |---|---|---|
-| `01-basics` | Input/output, file I/O, sets, dicts | 3 |
-| `02-control-flow` | Comprehensions, loops, conditionals | 1 |
-| `03-functions` | Definitions, scope, *args/**kwargs, exercises | 5 |
-| `04-error-handling` | try/except/finally, IOError, ZeroDivisionError | 2 |
-| `05-oop` | Classes, inheritance, polymorphism, `__str__`, `__del__` | 3 |
-| `06-modules-and-packages` | Import system, `__init__.py`, pip, PyPI | 2 + 2 `.py` files |
-| `07-projects` | End-to-end CLI programs | 3 |
+| `01-basics` | File I/O, context managers, sets, dictionaries | 3 |
+| `02-control-flow` | `for`/`while`, `break`/`continue`, `enumerate()`, comprehensions | 2 |
+| `03-functions` | Definitions, scope, `*args`/`**kwargs`, exercises (levels 1 & 2) | 5 |
+| `04-error-handling` | `try`/`except`/`else`/`finally`, explicit exception types | 2 |
+| `05-oop` | Classes, inheritance, `super()`, polymorphism, dunder methods | 3 |
+| `06-modules-and-packages` | Import system, `__init__.py`, pip, PyPI, PEP 517 build | 2 + 3 supporting files |
+| `07-projects` | End-to-end CLI programs applying all prior modules | 3 |
 
 ---
 
-## Repository Structure
+## Known Issues
 
-```
-python-learning-fundamentals/
-├── .gitignore
-├── README.md               ← You are here
-├── ARCHITECTURE.md
-├── MIGRATION.md
-├── environment.yml
-├── 01-basics/
-│   ├── README.md
-│   ├── input_output.ipynb
-│   ├── sets.ipynb
-│   └── dictionaries.ipynb
-├── 02-control-flow/
-│   ├── README.md
-│   └── list_comprehensions.ipynb
-├── 03-functions/
-│   ├── README.md
-│   ├── methods_and_documentation.ipynb
-│   ├── function_interactions.ipynb
-│   ├── args_kwargs.ipynb
-│   ├── exercises_level_one.ipynb
-│   └── exercises_level_two.ipynb
-├── 04-error-handling/
-│   ├── README.md
-│   ├── errors_and_exceptions.ipynb
-│   └── exercises.ipynb
-├── 05-oop/
-│   ├── README.md
-│   ├── oop_fundamentals.ipynb
-│   ├── oop_advanced.ipynb
-│   └── special_methods.ipynb
-├── 06-modules-and-packages/
-│   ├── README.md
-│   ├── modules_and_packages.ipynb
-│   ├── pip_and_pypi.ipynb
-│   └── examples/
-│       ├── drinks.py
-│       └── demo.py
-├── 07-projects/
-│   ├── README.md
-│   ├── project-01-confidence-game/
-│   │   ├── README.md
-│   │   ├── warmup_exercises.ipynb
-│   │   └── confidence_game.ipynb
-│   └── project-02-card-game/
-│       ├── README.md
-│       └── bicycle_war.ipynb
-└── scratch/
-    └── .gitkeep
-```
+Six runtime bugs were identified in the legacy repository. All are tracked in `BACKLOG.md` (section `BUG`) with acceptance criteria and priority. Status below reflects the migration baseline — check `BACKLOG.md` for current completion state.
 
----
+| ID | Status | Legacy Source | Bug | Target File |
+|---|---|---|---|---|
+| BUG-01 | [ ] | `[Short Exercise] Errors and Exceptions.ipynb` | `i = input(...)` returns `str`; `while i > 0` — `TypeError` on comparison | `04-error-handling/exercises.ipynb` |
+| BUG-02 | [ ] | `[Notes] - OOP Extended Version.ipynb` | `Stadium = Music('Stadium')` — `Music` undefined; class is `Sound` | `05-oop/oop_advanced.ipynb` |
+| BUG-03 | [ ] | `[Sandpit] A Confidence Game.ipynb` | `return int(guess)` inside `while` loop — validation never executes | `07-projects/project-01-confidence-game/confidence_game.ipynb` |
+| BUG-04 | [ ] | `[Section 6] Function Practice Exercises.ipynb` | `animaCrackers` defined; `animalCrackers` called — `NameError` | `03-functions/exercises_level_one.ipynb` |
+| BUG-05 | [ ] | `[Notes] More *Args & **Kwargs.ipynb` | `newArgs` assigned; `new_args` referenced in same scope — `NameError` | `03-functions/args_kwargs.ipynb` |
+| BUG-06 | [ ] | `[Milestone project 1] Warmup Project Exercises.ipynb` | `clearOutput()` called; correct name is `clear_output` — `NameError` | `07-projects/project-01-confidence-game/warmup_exercises.ipynb` |
 
-## Known Code Issues (Resolved in Migration)
+> All six are P0 in `BACKLOG.md`. `pytest --nbmake` (Phase 4) will surface them if not resolved first.
 
-The following bugs existed in the legacy repository and are corrected in this version:
+## Documentation Index
 
-| File (Legacy) | Issue | Fix Applied |
-|---|---|---|
-| `.ipynb_checkpoints/Error-checkpoint.ipynb` | `i = input(...)` used raw string in `while i > 0` — `TypeError` on comparison | Cast to `int`: `i = int(input(...))` |
-| `OOP Extended Version.ipynb` | `Stadium = Music('Stadium')` — `Music` class undefined; class is named `Sound` | Renamed instantiation to `Stadium = Sound('Stadium')` |
-| `[Sandpit] A Confidence Game` | `return int(guess)` inside `while` loop — exits before validation loop completes | Dedented `return` to execute after loop exits |
-| `exercises_level_one.ipynb` | `animaCrackers` defined, called as `animalCrackers` — `NameError` | Unified to `animal_crackers` (snake_case, consistent) |
-
----
-
-## .gitignore
-
-The following are excluded from version control (missing in the legacy repo):
-
-```gitignore
-# Jupyter
-.ipynb_checkpoints/
-*.pyc
-__pycache__/
-
-# Conda / pip
-*.egg-info/
-dist/
-build/
-.env
-.venv
-
-# OS
-.DS_Store
-Thumbs.db
-```
-
----
-
-## Environment Specification
-
-```yaml
-# environment.yml
-name: py-fundamentals
-channels:
-  - defaults
-  - conda-forge
-dependencies:
-  - python=3.11
-  - jupyter
-  - jupyterlab
-  - ipykernel
-  - requests
-  - beautifulsoup4
-  - pip
-```
-
----
-
-## Contributing
-
-This is a personal learning repository maintained by AMCMDV. No external contributions are expected. If you are forking this for your own use, please remove the AMCMDV branding.
+| Document | Purpose |
+|---|---|
+| `ARCHITECTURE.md` | Design decisions (6-column matrix), full module breakdown, all bug fix details, migration phases, risk assessment |
+| `MIGRATION.md` | Step-by-step operational runbook — from legacy clone cleanup to GitHub archival |
+| `BACKLOG.md` | Live structured register: 42 items across BUG / STR / MOD / GAP / DEF / CI / GOV / ENV categories |
 
 ---
 
 ## Licence
 
-Private. All rights reserved. AMCMDV © 2026.
+Private. All rights reserved. SAEHL © 2025.
