@@ -1,0 +1,13 @@
+# environment.yml
+name: py-fundamentals
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.11
+  - jupyter
+  - jupyterlab
+  - ipykernel
+  - requests
+  - beautifulsoup4
+  - pip

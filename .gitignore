@@ -1,0 +1,15 @@
+# Jupyter
+.ipynb_checkpoints/
+*.pyc
+__pycache__/
+
+# Conda / pip
+*.egg-info/
+dist/
+build/
+.env
+.venv
+
+# OS
+.DS_Store
+Thumbs.db
