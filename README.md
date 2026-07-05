@@ -90,21 +90,6 @@ scratch/                    → Experimental — not reviewed, not in CI
 
 ---
 
-## Known Issues
-
-Six runtime bugs were identified in the legacy repository. All are tracked in `BACKLOG.md` (section `BUG`) with acceptance criteria and priority. Status below reflects the migration baseline — check `BACKLOG.md` for current completion state.
-
-| ID | Status | Legacy Source | Bug | Target File |
-|---|---|---|---|---|
-| BUG-01 | [ ] | `[Short Exercise] Errors and Exceptions.ipynb` | `i = input(...)` returns `str`; `while i > 0` — `TypeError` on comparison | `04-error-handling/exercises.ipynb` |
-| BUG-02 | [ ] | `[Notes] - OOP Extended Version.ipynb` | `Stadium = Music('Stadium')` — `Music` undefined; class is `Sound` | `05-oop/oop_advanced.ipynb` |
-| BUG-03 | [ ] | `[Sandpit] A Confidence Game.ipynb` | `return int(guess)` inside `while` loop — validation never executes | `07-projects/project-01-confidence-game/confidence_game.ipynb` |
-| BUG-04 | [ ] | `[Section 6] Function Practice Exercises.ipynb` | `animaCrackers` defined; `animalCrackers` called — `NameError` | `03-functions/exercises_level_one.ipynb` |
-| BUG-05 | [ ] | `[Notes] More *Args & **Kwargs.ipynb` | `newArgs` assigned; `new_args` referenced in same scope — `NameError` | `03-functions/args_kwargs.ipynb` |
-| BUG-06 | [ ] | `[Milestone project 1] Warmup Project Exercises.ipynb` | `clearOutput()` called; correct name is `clear_output` — `NameError` | `07-projects/project-01-confidence-game/warmup_exercises.ipynb` |
-
-> All six are P0 in `BACKLOG.md`. `pytest --nbmake` (Phase 4) will surface them if not resolved first.
-
 ## Documentation Index
 
 | Document | Purpose |
