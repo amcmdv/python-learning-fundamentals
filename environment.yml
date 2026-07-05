@@ -1,13 +1,18 @@
-# environment.yml
 name: py-fundamentals
 channels:
-  - defaults
   - conda-forge
+  - defaults
 dependencies:
   - python=3.11
+  - jupyterlab=4.*
   - jupyter
-  - jupyterlab
   - ipykernel
   - requests
   - beautifulsoup4
   - pip
+  - pip:
+      - pytest
+      - nbmake
+      - nbstripout
+      - nbqa
+      - flake8
